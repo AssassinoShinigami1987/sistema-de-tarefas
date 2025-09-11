@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sistema de Tarefas (Básico)</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Conteúdo principal da aplicação -->
+    <main class="app">
+      <h1>Sistema de Tarefas</h1>
+
+      <!-- Formulário simples para criar tarefas -->
+      <!-- Campo 1: título da tarefa | Campo 2: descrição (opcional) -->
+      <form id="task-form" autocomplete="off">
+        <input
+          id="task-input"
+          type="text"
+          placeholder="Digite o título da tarefa..."
+          aria-label="Título da tarefa"
+          required
+        />
+        <input
+          id="task-desc"
+          type="text"
+          placeholder="Descrição (opcional)"
+          aria-label="Descrição da tarefa"
+        />
+        <button type="submit" title="Adicionar tarefa">Adicionar</button>
+      </form>
+
+      <!-- Lista onde as tarefas serão exibidas -->
+      <ul id="task-list" class="task-list" aria-live="polite"></ul>
+
+      <!-- Rodapé com contador simples de tarefas -->
+      <div class="footer">
+        <span id="task-counter">0 tarefas</span>
+      </div>
+    </main>
+
+    <!-- Script principal da aplicação -->
+    <script src="script.js" defer></script>
+  </body>
+</html>
