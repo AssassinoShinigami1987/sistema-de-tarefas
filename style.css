@@ -43,13 +43,14 @@ h1 {
 /* Linha com campo de título, descrição e botão Adicionar */
 #task-form {
   display: flex;
+  flex-wrap: wrap; /* permite quebrar linha para não estourar a caixa */
   gap: 8px;
   margin-bottom: 16px;
 }
 
 /* Campo de TÍTULO */
 #task-input {
-  flex: 1;
+  flex: 1 1 220px; /* cresce e encolhe, base 220px */
   padding: 10px 12px;
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -58,11 +59,45 @@ h1 {
 
 /* Campo de DESCRIÇÃO (opcional) */
 #task-desc {
-  flex: 1.2;
+  flex: 1 1 240px;
   padding: 10px 12px;
   border: 1px solid var(--border);
   border-radius: 8px;
   font-size: 14px;
+}
+
+/* Select de prioridade e data agrupados mantêm altura consistente */
+#task-priority {
+  flex: 0 1 180px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  background: #fff;
+}
+
+.date-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#task-due {
+  flex: 0 1 160px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  background: #fff;
+}
+
+#open-calendar {
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  border-radius: 8px;
+  padding: 9px 10px; /* altura parecida com inputs */
+  cursor: pointer;
 }
 
 #task-form button {
@@ -84,6 +119,52 @@ h1 {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+/* ============================
+   Controles (filtros, ordenação, ações)
+   ============================ */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0 14px;
+  padding: 10px;
+  background: #fafafa;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.filter-group button {
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.filter-group button.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.sort-group select {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.bulk-actions button {
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
 }
 
 /* Cada linha de tarefa */
@@ -144,6 +225,33 @@ h1 {
   font-size: 12px;
 }
 
+/* Data de vencimento */
+.due-text {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* Destaque para tarefas vencidas (não concluídas) */
+.task-item.overdue .task-text {
+  color: #b91c1c; /* vermelho escuro */
+}
+.task-item.overdue .due-text {
+  color: #dc2626; /* vermelho */
+}
+
+/* Badge de prioridade */
+.priority-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 11px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  margin-left: 6px;
+}
+.p-alta { background: #fee2e2; color: #991b1b; border-color: #fecaca; }
+.p-media { background: #e0e7ff; color: #3730a3; border-color: #c7d2fe; }
+.p-baixa { background: #dcfce7; color: #166534; border-color: #bbf7d0; }
+
 /* Botão excluir (vermelho) */
 .delete-btn {
   border: 1px solid var(--border);
@@ -165,8 +273,121 @@ h1 {
   margin-right: 6px;
 }
 
+/* Responsividade simples */
+@media (max-width: 640px) {
+  #task-form button[type="submit"] {
+    width: 100%;
+  }
+}
+
 .footer {
   margin-top: 12px;
   font-size: 13px;
   color: var(--muted);
 }
+
+/* ============================
+   Calendário simples
+   ============================ */
+.calendar {
+  margin-top: 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fafafa;
+  padding: 12px;
+}
+
+.cal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.cal-header h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.cal-header button {
+  border: 1px solid var(--border);
+  background: #fff;
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.cal-weekdays span {
+  text-align: center;
+}
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.cal-cell {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  min-height: 84px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cal-cell .day {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.cal-cell .items {
+  margin-top: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cal-item {
+  font-size: 11px;
+  border-radius: 6px;
+  padding: 2px 6px;
+  border: 1px solid var(--border);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cal-item.done { background: #ecfdf5; color: #065f46; border-color: #a7f3d0; }
+.cal-item.active { background: #eff6ff; color: #1e40af; border-color: #bfdbfe; }
+.cal-item.overdue { background: #fef2f2; color: #991b1b; border-color: #fecaca; }
+
+.cal-legend {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.cal-legend .dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  margin-right: 4px;
+}
+.cal-legend .done { background: #10b981; }
+.cal-legend .active { background: #2563eb; }
+.cal-legend .overdue { background: #ef4444; }

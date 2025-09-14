@@ -27,11 +27,64 @@
           placeholder="Descrição (opcional)"
           aria-label="Descrição da tarefa"
         />
+        <select id="task-priority" aria-label="Prioridade">
+          <option value="media" selected>Prioridade: Média</option>
+          <option value="alta">Prioridade: Alta</option>
+          <option value="baixa">Prioridade: Baixa</option>
+        </select>
+        <div class="date-wrap">
+          <input
+            id="task-due"
+            type="date"
+            aria-label="Data de conclusão (opcional)"
+          />
+        </div>
         <button type="submit" title="Adicionar tarefa">Adicionar</button>
       </form>
 
+      <!-- Controles adicionais: filtros, ordenação, limpeza e import/export -->
+      <section class="controls" aria-label="Controles da lista de tarefas">
+        <div class="filter-group" role="group" aria-label="Filtro de tarefas">
+          <button type="button" id="filter-all" class="active">Todas</button>
+          <button type="button" id="filter-active">Ativas</button>
+          <button type="button" id="filter-done">Concluídas</button>
+        </div>
+        <div class="sort-group">
+          <label for="sort-select">Ordenar por:</label>
+          <select id="sort-select">
+            <option value="padrao" selected>Padrão</option>
+            <option value="data">Data (mais próximas)</option>
+            <option value="prioridade">Prioridade (Alta→Baixa)</option>
+          </select>
+        </div>
+        <div class="bulk-actions">
+          <button type="button" id="clear-completed">Limpar concluídas</button>
+          <button type="button" id="export-btn">Exportar</button>
+          <button type="button" id="import-btn">Importar</button>
+          <input type="file" id="import-file" accept="application/json" hidden />
+        </div>
+      </section>
+
       <!-- Lista onde as tarefas serão exibidas -->
       <ul id="task-list" class="task-list" aria-live="polite"></ul>
+
+      <!-- Calendário mensal simples -->
+      <section class="calendar" aria-label="Calendário de tarefas">
+        <div class="cal-header">
+          <button type="button" id="cal-prev" title="Mês anterior">◀</button>
+          <h2 id="cal-title">Mês Ano</h2>
+          <button type="button" id="cal-next" title="Próximo mês">▶</button>
+        </div>
+        <div class="cal-weekdays">
+          <span>Dom</span><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span>
+        </div>
+        <div id="cal-grid" class="cal-grid"></div>
+        <div class="cal-legend">
+          <span class="dot done"></span> Concluída
+          <span class="dot active"></span> Ativa
+          <span class="dot overdue"></span> Vencida
+        </div>
+      </section>
 
       <!-- Rodapé com contador simples de tarefas -->
       <div class="footer">
