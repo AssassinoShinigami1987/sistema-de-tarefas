@@ -1,34 +1,37 @@
-# Sistemas de Projetos web
+# Sistema de Tarefas Web
 
-Aplicativo web utilizando o CRUD com designer simples usando html, css e js para o gerenciamento de tarefas do dia-a-dia com salvamento em local storage para manter o historico de tarefas salva no navagador
+Aplicativo web para gerenciamento de tarefas do dia a dia, utilizando HTML, CSS e JavaScript puro. Permite criar, listar, editar, concluir e excluir tarefas, com persistência dos dados no navegador via localStorage.
 
-- utiliza o CRUD (Create, Read, Update, Delete) para o gerenciamento de tarefas
-- salva as informações de forma persistente usando localstorage
-- visual simples e dinamico
-- adiciona tarefas com `nome da tarefa` e `legenda opcional`
-- indicativo de tarefas concluidas com letra tachada
+## Funcionalidades
+
+- **CRUD completo:** Criação, leitura, atualização e remoção de tarefas.
+- **Persistência:** As tarefas são salvas automaticamente no navegador.
+- **Filtros e ordenação:** Visualize todas, apenas ativas ou concluídas, e ordene por data ou prioridade.
+- **Prioridade e vencimento:** Defina prioridade (alta, média, baixa) e data de vencimento para cada tarefa.
+- **Calendário mensal:** Visualize tarefas distribuídas em um calendário simples.
+- **Importação/Exportação:** Salve ou recupere suas tarefas em formato JSON.
+- **Interface simples e responsiva:** Fácil de usar em qualquer dispositivo.
 
 ## Requisitos
 
-- requer somente um navegador web
+- Apenas um navegador web moderno.
 
 ## Como usar
 
-No diretorio do projeto, execute o arquivo `index.html`
-
-Passos na interface
-
-- selecione a caixa de texto e digite o titulo da tarefa
-- selecione a outra caixa de texto e coloque uma descrição na tarefa (opcional)
-- Voce pode escolher
-    - Marcar a caixa de texto para completar a tarefa
-    - Editar a tarefa que foi criada
-    - Apagar a tarefa que foi criada
-
-ao final a tarefa vai ser gerada e posteriomente ministrada pelo usuario
+1. Abra o arquivo [`index.html`](index.html) em seu navegador.
+2. Preencha o título da tarefa (obrigatório) e, se desejar, a descrição.
+3. Escolha a prioridade e a data de vencimento (opcional).
+4. Clique em **Adicionar** para criar a tarefa.
+5. Utilize os botões para marcar como concluída, editar ou excluir tarefas.
+6. Use os filtros, ordenação e calendário para organizar suas tarefas.
+7. Exporte ou importe tarefas usando os botões correspondentes.
 
 ## Observações
 
-- O projeto ainda esta em fase de desenvolvimento
-- Coisas como agenda e calendario ainda serão implementadas
-- As informações são salvas em uma array com persistencia
+- O projeto está em desenvolvimento.
+- Novas funcionalidades podem ser adicionadas.
+- Todas as informações ficam salvas localmente no navegador.
+
+## Licença
+
+Este projeto é de uso livre para fins educacionais e pessoais.
